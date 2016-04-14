@@ -79,7 +79,11 @@
     <span class="glyphicon glyphicon-time"></span>
                 <span class="postCreated">@Html.Raw(comment.Created)</span>
     <div class="commentBody">
-        @Html.Raw(comment.Body);
+        @Html.Raw(comment.Body)
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id })
+        @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id })
     </div>
     <br />
 }
@@ -95,13 +99,13 @@
 
         <input type="text" name="Body" class="form-control">
      </div>
-     <button type="submit" class="btn btn-primary btn-lg" id="submit-button">Post comment</button>
+     <button type="submit" class="btn btn-primary btn-lg" id="submit-button">Post comment</button>    
 
 }
 
 
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

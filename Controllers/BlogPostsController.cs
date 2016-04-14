@@ -167,15 +167,6 @@ namespace Wonderly_Blog.Controllers
                     ModelState.AddModelError("Title", "Invalid title.");
                     return View(blogPost);
                 }
-
-               
-
-                    /*if (db.Posts.Any(p => p.Slug == Slug))
-                    {
-                        
-                        ModelState.AddModelError("Title", "The title must be unique.");
-                        return View(blogPost);
-                    } */
                 
                 /* Start Ele's code */
                 var SlugAlreadyExists = db.Posts.Where(p => p.Id == PostId && p.Slug == Slug).Select(p => p.Slug);
@@ -269,7 +260,98 @@ namespace Wonderly_Blog.Controllers
             var post = db.Posts.Find(comment.PostID);
             return RedirectToAction("Details", new { slug = post.Slug });
         }
-        
+
+        [Authorize(Roles = "Admin, Moderator")]
+        // GET: BlogPosts/Edit/5
+        public ActionResult EditComment(int commentID)
+        {
+
+
+            Comment comment = db.Comments.FirstOrDefault(p => p.Id == commentID);
+
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+
+
+
+            //return View(blogPost);
+
+
+            /*
+            BlogPost post = db.Posts.FirstOrDefault(p => p.Slug == slug);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            */
+
+
+            return View(comment);
+
+        }
+
+        // POST: BlogPosts/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComment([Bind(Include = "Id,Body,Updated,PostID")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                //var body = comment.Body;
+
+                if (String.IsNullOrWhiteSpace(comment.Body))
+                {
+                    ModelState.AddModelError("Body", "A comment body is required.");
+                    return View(comment);
+                }
+
+
+                
+                comment.Updated = System.DateTimeOffset.Now;
+                db.Comments.Attach(comment);
+
+                //db.Entry(blogPost).State = EntityState.Modified;
+                db.Entry(comment).Property("Body").IsModified = true;
+                db.Entry(comment).Property("Updated").IsModified = true;
+                db.SaveChanges();
+                var post = db.Posts.Find(comment.PostID);
+                return RedirectToAction("Details", new { slug = post.Slug });
+            }
+            return View(); //formerly had comment inside parentheses
+        }
+
+        // GET: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult DeleteComment(int commentID)
+        {
+
+            Comment comment = db.Comments.FirstOrDefault(p => p.Id == commentID);
+
+            if (comment == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(comment);
+        }
+
+        // POST: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
+        [HttpPost, ActionName("DeleteComment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteCommentConfirmed(int commentID)
+        {
+            Comment comment = db.Comments.FirstOrDefault(p => p.Id == commentID);
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+            return RedirectToAction("Directory");
+        }
+
 
 
     }

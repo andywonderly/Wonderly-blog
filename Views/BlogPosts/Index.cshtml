@@ -15,11 +15,12 @@
 
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
+    <div>
         <label>Search term</label>
-        <input type="text" name="query" class="form-control">
+        <input type="text" name="query" class="form-control" style="width: 100%; padding-right: 70px; display: inline;">
+        <button type="submit" id="submit-button" class="btn btn-primary" style="width: 70px;">Search</button>
     </div>
-    <button type="submit" class="btn btn-primary btn-lg" id="submit-button">Search</button>
+    
 
 }
 
