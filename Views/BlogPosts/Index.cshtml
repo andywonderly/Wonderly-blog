@@ -1,0 +1,71 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+
+@model IPagedList<Wonderly_Blog.Models.CodeFirst.BlogPost>
+
+
+
+@{
+    ViewBag.Title = "Andy Wonderly // Blog";
+}
+
+@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>Search term</label>
+        <input type="text" name="query" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg" id="submit-button">Search</button>
+
+}
+
+<br />
+
+@foreach (var item in Model)
+{
+
+    <span class="postTitleBlock">
+        <span class="postTitle">
+            <a href="../Blog/@Html.DisplayFor(modelItem => item.Slug)">@Html.DisplayFor(modelItem => item.Title)</a>
+        </span>
+        <br />
+        <span class="authorDateTime">
+            <span id="postAuthor"><b>Andy</b></span>
+            <span class="glyphicon glyphicon-time"></span>
+            <span class="postCreated">@Html.DisplayFor(modelItem => item.Created)</span>
+        </span>
+    </span>
+
+        
+            
+
+            <br /> 
+            <div class="postBody">  
+                    @Html.Raw(item.Body)                              
+            </div>
+
+
+            <br />
+            <div>
+                @if (item.MediaURL != null)
+                {
+                    <a href="#" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img id="postMedia" src="@Url.Content(item.MediaURL)" style="max-height: 256px;"></a>
+
+                    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)">
+                        <img src="@Url.Content(item.MediaURL)" />
+                    </div>
+                }
+            </div>
+            <span class="postUpdated">
+
+            </span>
+
+            <hr />
+
+}
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

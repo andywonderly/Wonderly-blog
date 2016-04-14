@@ -1,0 +1,62 @@
+﻿@*@model Wonderly-Blog.Models.Contact*@
+@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+
+<section id="section-contact" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-left">
+                    <div class="location">
+                        <ul>
+                            <li><span><h2>Contact Me</h2></span></li>
+                            <li><span>Andrew Wonderly</span></li>
+                            <li><span>1231 Shields Rd. #5</span></li>
+                            <li><span>Kernersville, NC 27284</span></li>
+                            <a href="mailto:andywonderly@gmail.com"><li><span>andywonderly@gmail.com</span></li></a>
+                            <li><span>(336) 231-8632</span></li>
+<li>@ViewBag.Name</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+
+                
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                {
+                
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label>Name*</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Email address*</label>
+                    <input type="text" name="email" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Message*</label>
+                    <input type="text" name="message" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-default">Contact me</button>
+                    </div>
+                </div>
+                }
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
