@@ -4,10 +4,30 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>BlogPost</h4>
+    <h2>@Html.DisplayFor(model => model.Title)</h2>
+    <h4><b>Andy</b>
+    <span class="glyphicon glyphicon-time"></span>
+    <span class="postCreated">@Html.Raw(Model.Created)</span></h4>
+    <table style="width: 100%;">
+        <tr>
+            <td>
+                <h4><b>Andy</b></h4>
+            </td>
+            <td><h4>
+                <span class="glyphicon glyphicon-time"></span>
+                <span class="postCreated">@Html.Raw(Model.Created)</span>
+            </h4></td>
+        <tr>
+            <td>
+                <h4>Updated</h4>
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-time"></span>
+                <span class="postCreated">@Html.Raw(Model.Updated)</span>
+            </td>
+        </tr>
+    </table>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -68,6 +88,10 @@
 
 
     </dl>
+    @if( Model.Updated != null )
+    {
+        <h5>Post updated <span class="glyphicon glyphicon-time"></span> @Html.Raw(Model.Updated)</h5>
+    }
 </div>
 
 
@@ -76,16 +100,19 @@
 
 @foreach (var comment in Model.Comments)
 {
-    <span class="glyphicon glyphicon-time"></span>
+    <div style="padding: 5px;">
+        <span id="postAuthor"><b>@Html.Raw(comment.Author.Email)</b></span>
+        <span class="glyphicon glyphicon-time"></span>
                 <span class="postCreated">@Html.Raw(comment.Created)</span>
-    <div class="commentBody">
-        @Html.Raw(comment.Body)
+        <div class="commentBody">
+            @Html.Raw(comment.Body)
+        </div>
+        <div>
+            @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id })
+            @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id })
+        </div>
+        <p style="color: lightgray;">________________________________________________</p>
     </div>
-    <div>
-        @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id })
-        @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id })
-    </div>
-    <br />
 }
 
 @using (Html.BeginForm("Comment", "BlogPosts", FormMethod.Post))

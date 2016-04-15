@@ -51,7 +51,7 @@
             @Html.DisplayFor(modelItem => item.Slug)
         </td>
         <td>
-            @Html.Raw(item.Body)
+            <div class="postBody">@Html.Raw(item.Body)</div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MediaURL) 
@@ -63,7 +63,8 @@
                     <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)">
                         <img src="@Url.Content(item.MediaURL)" />
                     </div>
-                @Html.ActionLink("Remove image", "DeleteImage", new { slug = item.Slug })
+                    <br />
+                    @Html.ActionLink("Remove image", "DeleteImage", new { slug = item.Slug })
             }
             
         </td>

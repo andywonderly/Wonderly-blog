@@ -308,7 +308,7 @@ namespace Wonderly_Blog.Controllers
 
         }
 
-        // POST: BlogPosts/Edit/5
+        // POST: BlogPosts/EditComment/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Admin, Moderator")]
@@ -341,7 +341,7 @@ namespace Wonderly_Blog.Controllers
             return View(); //formerly had comment inside parentheses
         }
 
-        // GET: BlogPosts/Delete/5
+        // GET: BlogPosts/DeleteComment/5
         [Authorize(Roles = "Admin, Moderator")]
         public ActionResult DeleteComment(int commentID)
         {
