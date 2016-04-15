@@ -36,6 +36,7 @@
     </tr>
 
 @foreach (var item in Model) {
+    
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Created)
@@ -53,8 +54,12 @@
             @Html.Raw(item.Body)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MediaURL)
-
+            @Html.DisplayFor(modelItem => item.MediaURL) 
+            @if(item.MediaURL != null)
+            {
+                @Html.ActionLink("Remove image", "DeleteImage", new { slug = item.Slug })
+            }
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Published)

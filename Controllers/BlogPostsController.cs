@@ -155,10 +155,20 @@ namespace Wonderly_Blog.Controllers
         [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "Id,Created,Updated,Title,Slug,Body,MediaURL,Published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+
+
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/img/blog"), fileName));
+                    blogPost.MediaURL = "~/img/blog/" + fileName;
+                }
+
+
                 var Slug = StringUtilities.URLFriendly(blogPost.Title);
                 var PostId = blogPost.Id;
 
@@ -185,7 +195,13 @@ namespace Wonderly_Blog.Controllers
                 db.Posts.Attach(blogPost);
                 db.Entry(blogPost).Property("Title").IsModified = true;
                 db.Entry(blogPost).Property("Body").IsModified = true;
-                db.Entry(blogPost).Property("MediaURL").IsModified = true;
+                //db.Entry(blogPost).Property("MediaURL").IsModified = false;
+
+                if ( blogPost.MediaURL != null )
+                {
+                   db.Entry(blogPost).Property("MediaURL").IsModified = true;
+                }
+
                 db.Entry(blogPost).Property("Slug").IsModified = true;
                 db.Entry(blogPost).Property("Updated").IsModified = true;
                 //db.Entry(blogPost).State = EntityState.Modified;
@@ -351,6 +367,39 @@ namespace Wonderly_Blog.Controllers
             db.SaveChanges();
             return RedirectToAction("Directory");
         }
+
+        // GET: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
+        public ActionResult DeleteImage(string slug)
+        {
+
+            BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == slug);
+
+            if (slug == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            if (blogPost == null)
+            {
+                return HttpNotFound();
+            }
+            return View(blogPost);
+        }
+
+        // POST: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
+        [HttpPost, ActionName("DeleteImage")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteImageConfirmed(string slug)
+        {
+            BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == slug);
+            blogPost.MediaURL = null;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
 
 
