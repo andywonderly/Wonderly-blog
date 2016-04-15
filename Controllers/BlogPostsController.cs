@@ -240,7 +240,7 @@ namespace Wonderly_Blog.Controllers
             BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == slug);
             db.Posts.Remove(blogPost);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Directory");
         }
 
         protected override void Dispose(bool disposing)
