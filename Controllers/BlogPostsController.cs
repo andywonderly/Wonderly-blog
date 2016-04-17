@@ -46,6 +46,7 @@ namespace Wonderly_Blog.Controllers
             return View(db.Posts.ToList());
         }
 
+        [Authorize]
         // GET: BlogPosts/Details/5
         public ActionResult Details(string slug)
         {
@@ -251,7 +252,8 @@ namespace Wonderly_Blog.Controllers
             }
             base.Dispose(disposing);
         }
-
+        
+        [Authorize]
         public ActionResult Comment()
         {
             Contact c = new Contact();
@@ -260,7 +262,8 @@ namespace Wonderly_Blog.Controllers
 
             return View(c);
         }
-
+        
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Comment([Bind(Include = "Id,PostID,Body")] Comment comment)
