@@ -270,6 +270,19 @@ namespace Wonderly_Blog.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Make sure comment box isn't empty
+                if (String.IsNullOrWhiteSpace(comment.Body))
+                {
+                    var post2 = db.Posts.Find(comment.PostID);
+                    return RedirectToAction("Details", new { slug = post2.Slug });
+                }
+                //Limit comment length to 1,000 characters
+                if (comment.Body.Length > 1000)
+                {
+                    var post2 = db.Posts.Find(comment.PostID);
+                    return RedirectToAction("Details", new { slug = post2.Slug });
+                }
+
                 comment.AuthorID = User.Identity.GetUserId();
                 comment.Created = DateTimeOffset.Now;
                 db.Comments.Add(comment);
@@ -314,23 +327,38 @@ namespace Wonderly_Blog.Controllers
         // POST: BlogPosts/EditComment/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditComment([Bind(Include = "Id,Body,Updated,PostID")] Comment comment)
+        public ActionResult EditComment([Bind(Include = "Id,Body,Updated,PostID,AuthorID")] Comment comment)
         {
-            if (ModelState.IsValid)
-            {
-                //var body = comment.Body;
+            var currentUser = User.Identity.GetUserId();
+            var commentAuthor = comment.AuthorID;
 
+            if (ModelState.IsValid && currentUser == commentAuthor)
+            {
+                             
+                
                 if (String.IsNullOrWhiteSpace(comment.Body))
                 {
                     ModelState.AddModelError("Body", "A comment body is required.");
                     return View(comment);
                 }
 
+                if (comment.Body.Length > 1000)
+                {
+                    ModelState.AddModelError("Body", "Comment length cannot exceed 1,000 characters.");
+                    return View(comment);
+                }
 
-                
+                //if (comment.Body.Length > 20)
+                //{
+                //    ModelState.AddModelError("Body", "Your comment is too long.");
+                //    return View(comment);
+                //}
+
+
+
                 comment.Updated = System.DateTimeOffset.Now;
                 db.Comments.Attach(comment);
 
@@ -341,15 +369,24 @@ namespace Wonderly_Blog.Controllers
                 var post = db.Posts.Find(comment.PostID);
                 return RedirectToAction("Details", new { slug = post.Slug });
             }
-            return View(); //formerly had comment inside parentheses
+
+            var post2 = db.Posts.Find(comment.PostID);
+            return RedirectToAction("Details", new { slug = post2.Slug });
         }
 
         // GET: BlogPosts/DeleteComment/5
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize]
         public ActionResult DeleteComment(int commentID)
         {
 
             Comment comment = db.Comments.FirstOrDefault(p => p.Id == commentID);
+
+            var currentUser = User.Identity.GetUserName();
+
+            if (!User.IsInRole("Admin") && currentUser != comment.Author.Email)
+            {
+                return HttpNotFound();
+            }
 
             if (comment == null)
             {
@@ -359,8 +396,8 @@ namespace Wonderly_Blog.Controllers
             return View(comment);
         }
 
-        // POST: BlogPosts/Delete/5
-        [Authorize(Roles = "Admin, Moderator")]
+        // POST: BlogPosts/DeleteComment/5
+        [Authorize]
         [HttpPost, ActionName("DeleteComment")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteCommentConfirmed(int commentID)
@@ -368,7 +405,15 @@ namespace Wonderly_Blog.Controllers
             Comment comment = db.Comments.FirstOrDefault(p => p.Id == commentID);
             db.Comments.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Directory");
+
+            if(User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Directory");
+            } else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
 
         // GET: BlogPosts/Delete/5

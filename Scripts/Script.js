@@ -3,7 +3,7 @@
     $('.postBody').each(function () {
 
         //Desired initial body length
-        var bodyLength = 250;
+        var bodyLength = 400;
         var tooLong = false;
 
         var content = $(this).html();

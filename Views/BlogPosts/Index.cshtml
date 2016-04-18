@@ -64,8 +64,12 @@
             <span class="postUpdated">
 
             </span>
-
+            <a href="../Blog/@Html.DisplayFor(modelItem => item.Slug)#comments">
+                <span style="font-size: 12px;">@item.Comments.Count</span>
+                <span style="font-size: 12px;"> comments</span>
+            </a>
             <hr />
+            
 
 }
 

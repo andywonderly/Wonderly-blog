@@ -8,7 +8,7 @@
     <h2>@Html.DisplayFor(model => model.Title)</h2>
     <h4><b>Andy</b>
     <span class="glyphicon glyphicon-time"></span>
-    <span class="postCreated">@Html.Raw(Model.Created)</span></h4>
+    <span class="postCreated">@Html.Raw(Model.Created.LocalDateTime)</span></h4>
     <table style="width: 100%;">
         <tr>
             <td>
@@ -94,9 +94,14 @@
     }
 </div>
 
+<a name="comments"></a>
+
+<div style="height:40px;"></div> <!-- Spacer so that the comments header is at the top
+                                     of the page when the target link is clicked -->
+
+ 
 
 <h3>Comments</h3>
-
 
 @foreach (var comment in Model.Comments)
 {
@@ -108,8 +113,19 @@
             @Html.Raw(comment.Body)
         </div>
         <div>
-            @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id })
-            @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id })
+            <!-- Only display edit link if the user is the comment's author -->
+            @if((User.Identity.Name == comment.Author.Email))
+            {
+                
+                @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id });
+                @Html.Raw(" ");
+            }
+
+            <!-- only display delete link if the user is an admin or the comment's author -->
+            @if ((User.Identity.Name == comment.Author.Email) || ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id });
+            }
         </div>
         <p style="color: lightgray;">________________________________________________</p>
     </div>

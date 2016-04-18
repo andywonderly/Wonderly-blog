@@ -10,14 +10,17 @@
                 new { enctype = "Multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>@Html.Raw(Model.Body)</h4>
+        <h4>
+            @Html.Raw(Model.Body);
+        </h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.PostID)
         @Html.HiddenFor(model => model.Updated)
+        @Html.HiddenFor(model => model.AuthorID)
         
         <!-- Remove title editing code. -->
         <div class="form-group">
