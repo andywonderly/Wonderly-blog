@@ -12,9 +12,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>
-            @Html.Raw(Model.Body);
-        </h4>
+        
+        <div class="postBody">
+           <h4>@Html.Raw(Model.Body)</h4>
+        </div>
+       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)

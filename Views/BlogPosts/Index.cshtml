@@ -57,7 +57,7 @@
                     <a href="#" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img id="postMedia" src="@Url.Content(item.MediaURL)" style="max-height: 256px;"></a>
 
                     <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)">
-                        <img src="@Url.Content(item.MediaURL)" />
+                        <a href="" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img src="@Url.Content(item.MediaURL)" /> </a>
                     </div>
                 }
             </div>

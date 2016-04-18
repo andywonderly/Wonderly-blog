@@ -9,7 +9,7 @@
         var content = $(this).html();
 
         if (content.length > bodyLength) {
-            this.innerHTML = content.substring(0, bodyLength) + " ...";
+            this.innerHTML = content.substring(0, bodyLength) + "...";
             tooLong = true;
         }
         else

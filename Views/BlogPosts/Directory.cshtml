@@ -61,9 +61,8 @@
             {
                 <a href="#" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img id="postMedia" src="@Url.Content(item.MediaURL)" style="max-height: 128px; max-width: 128px;"></a>
 
-                    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)">
-                    <br />
-                            <img src="@Url.Content(item.MediaURL)" />
+                    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)" style="">
+                         <a href="" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img src="@Url.Content(item.MediaURL)" /></a>
                     </div>
                     <br />
                     @Html.ActionLink("Remove image", "DeleteImage", new { slug = item.Slug })

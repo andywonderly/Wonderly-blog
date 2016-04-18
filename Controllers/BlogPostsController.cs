@@ -293,7 +293,7 @@ namespace Wonderly_Blog.Controllers
             return RedirectToAction("Details", new { slug = post.Slug });
         }
 
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize]
         // GET: BlogPosts/Edit/5
         public ActionResult EditComment(int commentID)
         {
@@ -445,7 +445,7 @@ namespace Wonderly_Blog.Controllers
             BlogPost blogPost = db.Posts.FirstOrDefault(p => p.Slug == slug);
             blogPost.MediaURL = null;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Directory");
         }
 
 

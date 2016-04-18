@@ -15,7 +15,8 @@ namespace Wonderly_Blog.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "BlogPosts");
+            //return View();
         }
 
         public ActionResult Abc()

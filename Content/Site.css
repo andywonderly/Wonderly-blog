@@ -1,7 +1,14 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-  
+  	border: 0;
+	margin: 0;
+	padding: 0;
+	color: #333333;
+	font-size: 14px;
+	background: linear-gradient(#364346, white);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
  
 }
 
