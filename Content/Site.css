@@ -1,4 +1,36 @@
-﻿body {
+﻿@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic);
+
+
+
+@font-face {
+	font-family: 'ElegantIcons';
+	src:url('fonts/ElegantIcons.eot');
+	src:url('fonts/ElegantIcons.eot?#iefix') format('embedded-opentype'),
+		url('fonts/ElegantIcons.woff') format('woff'),
+		url('fonts/ElegantIcons.ttf') format('truetype'),
+		url('fonts/ElegantIcons.svg#ElegantIcons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'MyriadPro-Regular';
+	src: url('fonts/MyriadPro-Regular.eot?') format('eot'), 
+	     url('fonts/MyriadPro-Regular.otf')  format('opentype'),
+	     url('fonts/MyriadPro-Regular.woff') format('woff'), 
+	     url('fonts/MyriadPro-Regular.ttf')  format('truetype'),
+	     url('fonts/MyriadPro-Regular.svg#MyriadPro-Regular') format('svg');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic')
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
   	border: 0;
@@ -6,7 +38,9 @@
 	padding: 0;
 	color: #333333;
 	font-size: 14px;
-	background: linear-gradient(#364346, white);
+    font-family: 'Roboto', sans-serif;
+	/*background: linear-gradient(#364346, white);*/
+    background: linear-gradient(#698388, white);
     background-repeat: no-repeat;
     background-attachment: fixed;
  

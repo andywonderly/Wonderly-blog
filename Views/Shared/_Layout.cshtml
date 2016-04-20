@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/")
     <!-- put CSS files here -->
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -18,9 +19,11 @@
         window.appInsights=appInsights;
         appInsights.trackPageView();
     </script>
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+<body style="font-family: 'Roboto', sans-serif;">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height:90px; font-family: 'Roboto', sans-serif; background: #252e30;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"">
@@ -31,7 +34,8 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="font-family: 'Roboto', sans-serif; src: url('http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic');">
+                    
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -46,6 +50,12 @@
         </div>
     </div>
     <div class="container body-content">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        
         @RenderBody()
         <hr />
         <footer>
