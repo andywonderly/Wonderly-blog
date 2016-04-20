@@ -286,3 +286,4 @@ App_Start/Startup.Auth.cs
 Web.config
 Wonderly-Blog.csproj
 App_Start/IdentityConfig.cs
+Migrations/Configuration.cs
