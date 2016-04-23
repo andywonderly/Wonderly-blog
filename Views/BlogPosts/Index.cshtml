@@ -16,15 +16,13 @@
     @Html.AntiForgeryToken()
 
     <div style="text-align: right; padding-top: 5px;">
-        <label>Search term</label>
+        <!-- <label>Search the blog and comments:</label> -->
         <input type="text" name="query" class="form-control" style="width: 100%; padding-right: 70px; display: inline;">
         <button type="submit" id="submit-button" class="btn btn-primary" style="width: 70px;">Search</button>
     </div>
     
 
 }
-
-<br />
 
 @foreach (var item in Model)
 {
@@ -57,7 +55,7 @@
                     <a href="#" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img id="postMedia" src="@Url.Content(item.MediaURL)" style="max-height: 256px;"></a>
 
                     <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal" aria-hidden="true" id="modal-@Html.DisplayFor(modelItem => item.Id)">
-                        <a href="" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img src="@Url.Content(item.MediaURL)" /> </a>
+                        <a href="" data-toggle="modal" data-target="#modal-@Html.DisplayFor(modelItem => item.Id)"><img src="@Url.Content(item.MediaURL)" style="max-width: 1152px;"/> </a>
                     </div>
                 }
             </div>

@@ -115,7 +115,7 @@ namespace Wonderly_Blog.Controllers
             return View(blogPost);
         }
 
-        [Authorize (Roles = "Admin, Moderator")]
+        [Authorize (Roles = "Admin")]
         // GET: BlogPosts/Edit/5
         public ActionResult Edit(string slug)
         {
