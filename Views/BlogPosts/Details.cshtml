@@ -11,18 +11,8 @@
             Posted
         </span>
         <span class="glyphicon glyphicon-time"></span>
-        <span class="postCreated">@Model.Created</span>
-        @if (Model.Updated != null)
-        {
-            <br />
-            <span class="postCreated">
-                @Html.Raw("Updated ")
-            </span>
-            <span class="glyphicon glyphicon-time"></span>
-            <span class="postCreated">
-                @Model.Updated
-            </span>
-        }
+        <span class="postCreated">@Model.Created.LocalDateTime</span>
+
     </h6>
     @if(Model.MediaURL != null)
     {
@@ -37,3 +27,55 @@
         @Html.Raw(Model.Body)
     
 </div>
+
+<h3>Comments</h3>
+
+@foreach (var comment in Model.Comments)
+{
+    <div style="padding: 5px;">
+        <span id="postAuthor"><b>@Html.Raw(comment.Author.Email)</b></span>
+        <span class="glyphicon glyphicon-time"></span>
+        <span class="postCreated">@Html.Raw(comment.Created)</span>
+        <div class="commentBody">
+            @Html.Raw(comment.Body)
+        </div>
+        <div>
+            <!-- Only display edit link if the user is the comment's author -->
+            @if ((User.Identity.Name == comment.Author.Email))
+            {
+
+                @Html.ActionLink("Edit", "EditComment", new { commentID = comment.Id });
+                @Html.Raw(" ");
+            }
+
+            <!-- only display delete link if the user is an admin or the comment's author -->
+            @if ((User.Identity.Name == comment.Author.Email) || ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "DeleteComment", new { commentID = comment.Id });
+            }
+        </div>
+        <p style="color: lightgray;">________________________________________________</p>
+    </div>
+}
+
+@using (Html.BeginForm("Comment", "BlogPosts", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label>Comment</label>
+        <input type="hidden" name="PostID" value="@Model.Id" />
+
+        <input type="text" name="Body" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg" id="submit-button">Post comment</button>
+
+}
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { slug = Model.Slug }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

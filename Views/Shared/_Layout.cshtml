@@ -9,6 +9,7 @@
     <!-- put CSS files here -->
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
         var appInsights=window.appInsights||function(config){
             function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
@@ -22,33 +23,36 @@
 
 </head>
 
-<body style="font-family: 'Roboto', sans-serif;">
-    <div class="navbar navbar-inverse navbar-fixed-top" style="height:90px; font-family: 'Roboto', sans-serif; background: #252e30;">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" style="font-family: 'Roboto', sans-serif; src: url('http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic');">
-                    
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("New", "Abc", "Home")</li>
-                    <li>@Html.ActionLink("Blog Main", "../BlogPosts", "Home")</li>
-                    <li>@Html.ActionLink("Blog archive", "../BlogPosts/Directory", "Home")</li>
-                    <li>@Html.ActionLink("New post", "../BlogPosts/Create", "Home")</li>
-                    
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+<body>
+    <!--<section class="section-menu">-->
+        <div class="navbar navbar-default main-nav" role="navigation">
+            <div class="container">
+                <div class="navbar-header" style="font-family: 'Roboto';">
+                    <button class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="http://awonderly.azurewebsites.net" class="navbar-brand"> <img src="~/img/blog/logo.jpg" alt="">ANDY WONDERLY</a>
+                </div>  <!-- navbar-header end -->
+                <!-- main nav  -->
+
+                <div class="collapse navbar-collapse navigation" id="bs-example-navbar-collapse-1" role="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://awonderly.azurewebsites.net#section-profile">Profile </a></li>
+                        <li><a href="http://awonderly.azurewebsites.net#section-portfolio">Portfolio </a></li>
+                        <li><a href="http://awonderly.azurewebsites.net#section-jsexercises">JS Exercises </a></li>
+                        <li><a href="http://awonderly.azurewebsites.net#section-resume">Resume </a> </li>
+                        <li><a href="https://awonderly-blog.azurewebsites.net" class="external" style="color: #2ecc71;">Blog</a></li>
+                        <li><a href="http://awonderly.azurewebsites.net#section-contact">Contact me </a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
         </div>
-    </div>
+    <!--</section>-->
+
     <div class="container body-content">
         <br />
         <br />

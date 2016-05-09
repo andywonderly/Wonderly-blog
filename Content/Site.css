@@ -1,8 +1,4 @@
-﻿@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
-
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic);
-
+﻿
 
 
 @font-face {
@@ -25,10 +21,8 @@
 	     url('fonts/MyriadPro-Regular.svg#MyriadPro-Regular') format('svg');
 }
 
-@font-face {
-    font-family: 'Roboto';
-    src: url('http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic')
-}
+@import url(//fonts.googleapis.com/css?family=Roboto:400,300,500,700,400italic,500italic);
+
 
 body {
     padding-top: 50px;
@@ -38,7 +32,6 @@ body {
 	padding: 0;
 	color: #333333;
 	font-size: 14px;
-    font-family: 'Roboto', sans-serif;
 	/*background: linear-gradient(#364346, white);*/
     background: linear-gradient(#698388, white);
     background-repeat: no-repeat;
@@ -118,5 +111,66 @@ textarea {
 .readMore {
     display: inline;
     font-size: 1.2em;
+}
+
+/*==================================================
+	navbar-menu
+=====================================================*/
+.section-menu{
+    -webkit-font-smoothing: antialiased;
+    background: #252e30;
+	z-index: 9999;
+    
+    
+    
+}
+.navbar{}
+.navbar-default{
+	background: #252e30;
+	border: 0px;
+	border-radius: 0px;
+}
+.navbar-nav {}
+.navbar-nav li{
+	/*padding-right: 40px;*/
+}
+.navbar-default .navbar-nav > li > a{
+	text-transform: uppercase;
+	font-weight: normal;
+	padding: 30px 20px;
+	font-size: 16px;
+	font-family: 'Roboto', serif;
+	color: #fff;
+	line-height: 30px;
+    -webkit-font-smoothing: none;
+
+}
+.navbar-default .navbar-nav > li > a:hover,.navbar-default .navbar-nav > li > a:focus{
+	color: #2ecc71;
+}
+.main-nav{
+	width: 100%;
+	margin: 0 auto;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    color: #2ecc71;
+    background-color: transparent;
+}
+
+.navbar-brand img{
+	float: left;
+	margin-right: 20px;
+}
+.navbar-brand{
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #fff!important;
+	line-height: 40px;
+	padding-top: 25px;
+}
+.navbar-brand span{
+	color: #2ecc71;
+
 }
 

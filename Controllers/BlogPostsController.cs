@@ -46,7 +46,7 @@ namespace Wonderly_Blog.Controllers
             return View(db.Posts.ToList());
         }
 
-        [Authorize]
+        //[Authorize]
         // GET: BlogPosts/Details/5
         public ActionResult Details(string slug)
         {
@@ -253,15 +253,11 @@ namespace Wonderly_Blog.Controllers
             base.Dispose(disposing);
         }
         
-        [Authorize]
-        public ActionResult Comment()
-        {
-            Contact c = new Contact();
-            ViewBag.Name = "Ria";
-            ViewBag.Message = "Your contact page.";
-
-            return View(c);
-        }
+ //       [Authorize]
+ //       public ActionResult Comment()
+ //       {
+ //           return View();
+  //      }
         
         [Authorize]
         [HttpPost]

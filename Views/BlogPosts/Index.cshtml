@@ -9,20 +9,22 @@
 @{
     ViewBag.Title = "Andy Wonderly // Blog";
 }
+ @*MAKE A TABLE?  LEFT SIDE LOGIN INFO, RIGHT SIDE SEARCH BAR?  OR VICE VERSA*@
 
-@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Post))
-{
+<div>
+    @Html.Partial("~/Views/Shared/_LoginPartial2.cshtml")
+</div>
 
-    @Html.AntiForgeryToken()
-
-    <div style="text-align: right; padding-top: 5px;">
-        <!-- <label>Search the blog and comments:</label> -->
-        <input type="text" name="query" class="form-control" style="width: 100%; padding-right: 70px; display: inline;">
-        <button type="submit" id="submit-button" class="btn btn-primary" style="width: 70px;">Search</button>
-    </div>
+<div >
     
+    <!-- <label>Search the blog and comments:</label> -->
+    <input type="text" name="query" class="form-control" style="width: 100%; padding-right: 70px; display: inline;">
+    <button type="submit" id="submit-button" class="btn btn-primary" style="width: 70px;">Search</button>
+</div>
 
-}
+<div style="height: 25px;">
+   @*Spacer*@
+</div>
 
 @foreach (var item in Model)
 {
@@ -35,7 +37,7 @@
         <span class="authorDateTime">
             <span id="postAuthor"><b>Andy</b></span>
             <span class="glyphicon glyphicon-time"></span>
-            <span class="postCreated">@Html.DisplayFor(modelItem => item.Created)</span>
+            <span class="postCreated">@Html.DisplayFor(modelItem => item.Created.LocalDateTime)</span>
         </span>
     </span>
 
