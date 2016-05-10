@@ -35,7 +35,7 @@
     <div style="padding: 5px;">
         <span id="postAuthor"><b>@Html.Raw(comment.Author.Email)</b></span>
         <span class="glyphicon glyphicon-time"></span>
-        <span class="postCreated">@Html.Raw(comment.Created)</span>
+        <span class="postCreated">@Html.Raw(comment.Created.LocalDateTime)</span>
         <div class="commentBody">
             @Html.Raw(comment.Body)
         </div>

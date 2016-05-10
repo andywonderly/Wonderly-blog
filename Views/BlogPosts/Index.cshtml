@@ -18,8 +18,13 @@
 <div >
     
     <!-- <label>Search the blog and comments:</label> -->
+@using (Html.BeginForm("Index", "BlogPosts", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
     <input type="text" name="query" class="form-control" style="width: 100%; padding-right: 70px; display: inline;">
     <button type="submit" id="submit-button" class="btn btn-primary" style="width: 70px;">Search</button>
+}
 </div>
 
 <div style="height: 25px;">
